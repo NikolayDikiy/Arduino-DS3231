@@ -170,7 +170,7 @@ void DS3231::setDateTime(const char* date, const char* time)
 
 char* DS3231::dateFormat(const char* dateFormat, RTCDateTime dt)
 {
-    char buffer[255];
+    static char buffer[255];
 
     buffer[0] = 0;
 
@@ -298,7 +298,7 @@ char* DS3231::dateFormat(const char* dateFormat, RTCDateTime dt)
 
 char* DS3231::dateFormat(const char* dateFormat, RTCAlarmTime dt)
 {
-    char buffer[255];
+    static char buffer[255];
 
     buffer[0] = 0;
 
@@ -957,28 +957,28 @@ char *DS3231::strDayOfWeek(uint8_t dayOfWeek)
 {
     switch (dayOfWeek) {
         case 1:
-            return "Monday";
+            return (char*)"Monday";
             break;
         case 2:
-            return "Tuesday";
+            return (char*)"Tuesday";
             break;
         case 3:
-            return "Wednesday";
+            return (char*)"Wednesday";
             break;
         case 4:
-            return "Thursday";
+            return (char*)"Thursday";
             break;
         case 5:
-            return "Friday";
+            return (char*)"Friday";
             break;
         case 6:
-            return "Saturday";
+            return (char*)"Saturday";
             break;
         case 7:
-            return "Sunday";
+            return (char*)"Sunday";
             break;
         default:
-            return "Unknown";
+            return (char*)"Unknown";
     }
 }
 
@@ -986,43 +986,43 @@ char *DS3231::strMonth(uint8_t month)
 {
     switch (month) {
         case 1:
-            return "January";
+            return (char*)"January";
             break;
         case 2:
-            return "February";
+            return (char*)"February";
             break;
         case 3:
-            return "March";
+            return (char*)"March";
             break;
         case 4:
-            return "April";
+            return (char*)"April";
             break;
         case 5:
-            return "May";
+            return (char*)"May";
             break;
         case 6:
-            return "June";
+            return (char*)"June";
             break;
         case 7:
-            return "July";
+            return (char*)"July";
             break;
         case 8:
-            return "August";
+            return (char*)"August";
             break;
         case 9:
-            return "September";
+            return (char*)"September";
             break;
         case 10:
-            return "October";
+            return (char*)"October";
             break;
         case 11:
-            return "November";
+            return (char*)"November";
             break;
         case 12:
-            return "December";
+            return (char*)"December";
             break;
         default:
-            return "Unknown";
+            return (char*)"Unknown";
     }
 }
 
@@ -1032,19 +1032,19 @@ char *DS3231::strAmPm(uint8_t hour, bool uppercase)
     {
         if (uppercase)
         {
-            return "AM";
+            return (char*)"AM";
         } else
         {
-            return "am";
+            return (char*)"am";
         }
     } else
     {
         if (uppercase)
         {
-            return "PM";
+            return (char*)"PM";
         } else
         {
-            return "pm";
+            return (char*)"pm";
         }
     }
 }
@@ -1053,18 +1053,18 @@ char *DS3231::strDaySufix(uint8_t day)
 {
     if (day % 10 == 1)
     {
-        return "st";
+        return (char*)"st";
     } else
     if (day % 10 == 2)
     {
-        return "nd";
+        return (char*)"nd";
     }
     if (day % 10 == 3)
     {
-        return "rd";
+        return (char*)"rd";
     }
 
-    return "th";
+    return (char*)"th";
 }
 
 uint8_t DS3231::hour12(uint8_t hour24)
@@ -1203,7 +1203,7 @@ uint8_t DS3231::readRegister8(uint8_t reg)
         value = Wire.read();
     #else
         value = Wire.receive();
-    #endif;
+    #endif
     Wire.endTransmission();
 
     return value;
